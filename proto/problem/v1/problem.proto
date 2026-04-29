@@ -1,0 +1,28 @@
+syntax = "proto3";
+package problem.v1;
+
+service ProblemService {
+  rpc GetProblem(GetProblemRequest) returns (GetProblemResponse);
+  rpc GetAnswer(GetAnswerRequest) returns (GetAnswerResponse);
+}
+
+message GetProblemRequest {
+  int32 id = 1;
+}
+
+message GetProblemResponse {
+  int32 id = 1;
+  string title = 2;
+  string description = 3;
+  string setup_sql = 4;
+  string expected_result_json = 5;
+  string is_order_matters = 6;
+}
+
+message GetAnswerRequest {
+  int32 id = 1;
+}
+
+message GetAnswerResponse {
+  string answer_sql = 1;
+}
