@@ -14,15 +14,12 @@
       {
         devShells.default = pkgs.mkShell {
           buildInputs = with pkgs; [
-            # Protocol Buffers コアツール
-            buf # Linter, Formatter, Generatorとして強力なモダンツール
+            buf
+            grpcurl
 
-            # gRPC デバッグツール
-            grpcurl # コマンドラインからgRPCリクエストを送信するツール
-
-            # Go言語ツールチェーンとprotocプラグイン
             go
             go-tools
+            gotest
           ];
 
           shellHook = ''
@@ -30,6 +27,7 @@
             echo " command:"
             echo "   - buf           : Compile .proto files and generate Go code"
             echo "   - go            : Run Go commands (build, test, etc.)"
+            echo "   - gotest        : Run Go tests in the current directory"
             echo "   - grpcurl       : Test gRPC services from the command line"
             echo "================================================================"
           '';

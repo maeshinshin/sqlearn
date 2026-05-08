@@ -1,0 +1,11 @@
+id: 1
+title: "アクティブユーザーの抽出"
+setup_sql: |
+  CREATE TABLE users (id INT, name TEXT, active INT);
+  INSERT INTO users VALUES (1, 'Alice', 1), (2, 'Bob', 0), (3, 'Charlie', 1);
+expected_result_json: |
+  [{"name": "Alice"}, {"name": "Charlie"}]
+answer_sql: "SELECT name FROM users WHERE active = 1;"
+is_order_matters: false
+description: |
+  `users` テーブルから、`active` が 1 のユーザーの名前(`name`)を取得してください。

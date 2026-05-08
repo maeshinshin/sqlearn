@@ -1,0 +1,11 @@
+id: 2
+title: "高スコア順の並び替え"
+setup_sql: |
+  CREATE TABLE scores (user_id INT, score INT);
+  INSERT INTO scores VALUES (1, 85), (2, 95), (3, 70);
+expected_result_json: |
+  [{"user_id": 2, "score": 95}, {"user_id": 1, "score": 85}, {"user_id": 3, "score": 70}]
+answer_sql: "SELECT * FROM scores ORDER BY score DESC;"
+is_order_matters: true
+description: |
+  `scores` テーブルから、スコア(`score`)が高い順にすべてのカラムを取得してください。
