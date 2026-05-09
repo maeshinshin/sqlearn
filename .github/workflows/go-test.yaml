@@ -1,0 +1,41 @@
+name: Go Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Run Tests and Coverage
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Buf
+        uses: bufbuild/buf-setup-action@v1
+        with:
+          version: 1.68.4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate Proto files
+        run: buf generate
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: './backend/go.mod'
+          cache-dependency-path: './backend/go.sum'
+
+      - name: Download dependencies
+        run: go mod download
+        working-directory: ./backend
+
+      - name: Run tests with coverage
+        run: go test -v -cover $(go list ./... | grep -v gen)
+        working-directory: ./backend
