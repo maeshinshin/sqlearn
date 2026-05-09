@@ -31,6 +31,7 @@ func NewProblemHandler(fileSystem fs.FS) (*ProblemHandler, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to initialize ProblemRepository: %w", err)
 	}
+	slog.Info("ProblemHandler initialized successfully")
 
 	return &ProblemHandler{repo: repo}, nil
 }
@@ -49,6 +50,7 @@ func (h *ProblemHandler) GetProblem(
 		slog.Error("Failed to get problem by ID", "id", req.Id, "error", err)
 		return nil, connect.NewError(connect.CodeNotFound, err)
 	}
+	slog.Debug("Problem found", "id", prob.ID, "title", prob.Title)
 
 	res := &pb.GetProblemResponse{
 		Id:                 prob.ID,
@@ -73,10 +75,10 @@ func (h *ProblemHandler) GetAnswer(
 	if err != nil {
 		return nil, connect.NewError(connect.CodeNotFound, err)
 	}
+	slog.Debug("Problem found for GetAnswer", "id", prob.ID)
 
 	res := &pb.GetAnswerResponse{
 		AnswerSql: prob.AnswerSQL,
 	}
-
 	return res, nil
 }

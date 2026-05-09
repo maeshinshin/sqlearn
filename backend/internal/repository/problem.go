@@ -16,6 +16,8 @@ type ProblemRepository struct {
 }
 
 func NewProblemRepository(fileSystem fs.FS) (*ProblemRepository, error) {
+	slog.Info("Initializing ProblemRepository")
+
 	cache := make(map[int32]*domain.Problem)
 
 	entries, err := fs.ReadDir(fileSystem, ".")
@@ -23,6 +25,8 @@ func NewProblemRepository(fileSystem fs.FS) (*ProblemRepository, error) {
 		slog.Error("failed to read problems directory", "error", err)
 		return nil, fmt.Errorf("failed to read problems directory: %w", err)
 	}
+
+	slog.Info("Loading problems from file system", "numEntries", len(entries))
 
 	for _, entry := range entries {
 		if entry.IsDir() || !strings.HasSuffix(entry.Name(), ".yaml") {
@@ -41,8 +45,12 @@ func NewProblemRepository(fileSystem fs.FS) (*ProblemRepository, error) {
 			return nil, fmt.Errorf("failed to unmarshal problem YAML from file %s: %w", entry.Name(), err)
 		}
 
+		slog.Debug("Loaded problem", "id", prob.ID, "title", prob.Title)
+
 		cache[prob.ID] = &prob
 	}
+
+	slog.Info("ProblemRepository initialized successfully", "numProblems", len(cache))
 
 	return &ProblemRepository{cache: cache}, nil
 }
