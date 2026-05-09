@@ -72,7 +72,7 @@ type GetProblemResponse struct {
 	Description        string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	SetupSql           string                 `protobuf:"bytes,4,opt,name=setup_sql,json=setupSql,proto3" json:"setup_sql,omitempty"`
 	ExpectedResultJson string                 `protobuf:"bytes,5,opt,name=expected_result_json,json=expectedResultJson,proto3" json:"expected_result_json,omitempty"`
-	IsOrderMatters     string                 `protobuf:"bytes,6,opt,name=is_order_matters,json=isOrderMatters,proto3" json:"is_order_matters,omitempty"`
+	IsOrderMatters     bool                   `protobuf:"varint,6,opt,name=is_order_matters,json=isOrderMatters,proto3" json:"is_order_matters,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -142,11 +142,11 @@ func (x *GetProblemResponse) GetExpectedResultJson() string {
 	return ""
 }
 
-func (x *GetProblemResponse) GetIsOrderMatters() string {
+func (x *GetProblemResponse) GetIsOrderMatters() bool {
 	if x != nil {
 		return x.IsOrderMatters
 	}
-	return ""
+	return false
 }
 
 type GetAnswerRequest struct {
@@ -251,7 +251,7 @@ const file_problem_v1_problem_proto_rawDesc = "" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x1b\n" +
 	"\tsetup_sql\x18\x04 \x01(\tR\bsetupSql\x120\n" +
 	"\x14expected_result_json\x18\x05 \x01(\tR\x12expectedResultJson\x12(\n" +
-	"\x10is_order_matters\x18\x06 \x01(\tR\x0eisOrderMatters\"\"\n" +
+	"\x10is_order_matters\x18\x06 \x01(\bR\x0eisOrderMatters\"\"\n" +
 	"\x10GetAnswerRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x05R\x02id\"2\n" +
 	"\x11GetAnswerResponse\x12\x1d\n" +

@@ -16,7 +16,7 @@ message GetProblemResponse {
   string description = 3;
   string setup_sql = 4;
   string expected_result_json = 5;
-  string is_order_matters = 6;
+  bool is_order_matters = 6;
 }
 
 message GetAnswerRequest {
