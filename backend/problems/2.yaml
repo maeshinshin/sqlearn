@@ -1,0 +1,11 @@
+id: 2
+title: "全ての情報の表示"
+setup_sql: |
+  CREATE TABLE products (id INT, name TEXT, price INT);
+  INSERT INTO products VALUES (1, 'りんご', 100), (2, 'バナナ', 80), (3, 'メロン', 500);
+expected_result_json: |
+  [{"id": 1, "name": "りんご", "price": 100}, {"id": 2, "name": "バナナ", "price": 80}, {"id": 3, "name": "メロン", "price": 500}]
+answer_sql: "SELECT * FROM products;"
+is_order_matters: false
+description: |
+  `products` テーブルにある全ての列と全ての行を表示してください。

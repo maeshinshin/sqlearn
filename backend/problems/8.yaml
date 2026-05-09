@@ -1,0 +1,11 @@
+id: 8
+title: "特定のID以外を表示"
+setup_sql: |
+  CREATE TABLE members (id INT, name TEXT, role TEXT);
+  INSERT INTO members VALUES (1, 'Alice', 'Admin'), (2, 'Bob', 'User'), (3, 'Charlie', 'User');
+expected_result_json: |
+  [{"id": 2, "name": "Bob"}, {"id": 3, "name": "Charlie"}]
+answer_sql: "SELECT id, name FROM members WHERE id <> 1;"
+is_order_matters: false
+description: |
+  `members` テーブルから、IDが 1 ではない（1以外の）メンバーの「ID」と「名前」を取得してください。

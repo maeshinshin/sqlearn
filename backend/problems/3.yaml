@@ -1,0 +1,11 @@
+id: 3
+title: "商品名だけをリストアップ"
+setup_sql: |
+  CREATE TABLE products (id INT, name TEXT, price INT);
+  INSERT INTO products VALUES (1, 'りんご', 100), (2, 'バナナ', 80);
+expected_result_json: |
+  [{"name": "りんご"}, {"name": "バナナ"}]
+answer_sql: "SELECT name FROM products;"
+is_order_matters: false
+description: |
+  `products` テーブルから、商品名(`name`)だけを取得してください。

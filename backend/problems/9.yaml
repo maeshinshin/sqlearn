@@ -1,0 +1,11 @@
+id: 9
+title: "特定カテゴリの検索"
+setup_sql: |
+  CREATE TABLE books (id INT, title TEXT, genre TEXT);
+  INSERT INTO books VALUES (1, 'SQL入門', 'IT'), (2, '料理の基本', 'Life'), (3, 'Goプログラミング', 'IT');
+expected_result_json: |
+  [{"title": "SQL入門"}, {"title": "Goプログラミング"}]
+answer_sql: "SELECT title FROM books WHERE genre = 'IT';"
+is_order_matters: false
+description: |
+  `books` テーブルから、ジャンル(`genre`)が 'IT' である本のタイトルのみを取得してください。

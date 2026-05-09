@@ -1,0 +1,11 @@
+id: 4
+title: "商品名と価格のリスト"
+setup_sql: |
+  CREATE TABLE items (id INT, name TEXT, price INT, category TEXT);
+  INSERT INTO items VALUES (1, '消しゴム', 50, '文具'), (2, '定規', 150, '文具'), (3, 'ノート', 120, '文具');
+expected_result_json: |
+  [{"name": "消しゴム", "price": 50}, {"name": "定規", "price": 150}, {"name": "ノート", "price": 120}]
+answer_sql: "SELECT name, price FROM items;"
+is_order_matters: false
+description: |
+  `items` テーブルから、商品名(`name`)と価格(`price`)の2つの列だけを取得してください。

@@ -1,0 +1,11 @@
+id: 7
+title: "高額商品の抽出"
+setup_sql: |
+  CREATE TABLE products (id INT, name TEXT, price INT);
+  INSERT INTO products VALUES (1, 'ペン', 100), (2, 'カバン', 5000), (3, '時計', 15000), (4, 'シール', 50);
+expected_result_json: |
+  [{"name": "カバン", "price": 5000}, {"name": "時計", "price": 15000}]
+answer_sql: "SELECT name, price FROM products WHERE price >= 5000;"
+is_order_matters: false
+description: |
+  `products` テーブルから、価格(`price`)が 5000円以上の商品の「名前」と「価格」を取得してください。

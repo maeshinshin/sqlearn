@@ -1,0 +1,11 @@
+id: 6
+title: "分かりやすい列名で表示"
+setup_sql: |
+  CREATE TABLE users (user_id INT, user_name TEXT);
+  INSERT INTO users VALUES (101, 'サトウ'), (102, 'ササキ');
+expected_result_json: |
+  [{"ID": 101, "名前": "サトウ"}, {"ID": 102, "名前": "ササキ"}]
+answer_sql: "SELECT user_id AS ID, user_name AS 名前 FROM users;"
+is_order_matters: false
+description: |
+  `users` テーブルの `user_id` を `ID` という名前に、`user_name` を `名前` という名前に変えて（別名をつけて）取得してください。

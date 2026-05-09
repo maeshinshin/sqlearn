@@ -1,0 +1,12 @@
+id: 10
+title: "未入力データの確認"
+setup_sql: |
+  CREATE TABLE tasks (id INT, task_name TEXT, completed_at TEXT);
+  INSERT INTO tasks VALUES (1, 'メール返信', '2026-05-09'), (2, '企画書作成', NULL), (3, '掃除', NULL);
+expected_result_json: |
+  [{"task_name": "企画書作成"}, {"task_name": "掃除"}]
+answer_sql: "SELECT task_name FROM tasks WHERE completed_at IS NULL;"
+is_order_matters: false
+description: |
+  `tasks` テーブルの `completed_at` 列には、完了していないタスクの場合 `NULL` が入っています。
+  まだ完了していないタスクの名前を取得してください。

@@ -1,0 +1,12 @@
+id: 5
+title: "存在するカテゴリの一覧"
+setup_sql: |
+  CREATE TABLE employees (id INT, name TEXT, department TEXT);
+  INSERT INTO employees VALUES (1, '田中', '営業'), (2, '佐藤', '開発'), (3, '鈴木', '営業'), (4, '高橋', '人事'), (5, '伊藤', '開発');
+expected_result_json: |
+  [{"department": "営業"}, {"department": "開発"}, {"department": "人事"}]
+answer_sql: "SELECT DISTINCT department FROM employees;"
+is_order_matters: false
+description: |
+  `employees` テーブルには部署名(`department`)が重複して登録されています。
+  重複を除いて、存在する部署名を1つずつ表示してください。
